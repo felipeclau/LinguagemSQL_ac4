@@ -1,0 +1,18 @@
+Tabelas 
+
+
+
+  TABELAS                                    CHAVE ESTRANGEIRA
+Usuario                           --não tem
+Coordenador                       --id_usuario
+Aluno                             --id_usuario
+Professor                         --id_usuario
+
+Disciplina                        --id_coordenador
+Disciplina Ofertada               --id_coordenador / id_disciplina / id_curso / id_professor
+Curso                             --não tem
+Solicitação Matricula             --id_aluno / id_disciplinaofertada / id_coordenador
+Atividade                         --id_professor
+Atividade Vinculada               --id_atividade / id_professor / id_disciplinaofertada
+Entrega                           --id_aluno / id_atividadevinculada / id_professor
+Mensagem                          --id_aluno / id_professor
