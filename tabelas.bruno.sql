@@ -26,8 +26,8 @@ CREATE TABLE Disciplina
 (
 	ID INT NOT NULL IDENTITY(1,1),
 	Nome VARCHAR(100) NOT NULL,
-	Data DATE NOT NULL CONSTRAINT DF_DataDisciplina DEFAULT(GETDATE()),
-	Status VARCHAR(7) NOT NULL CONSTRAINT DF_StatusDisciplina DEFAULT 'Aberta',
+	[Data] DATE NOT NULL CONSTRAINT DF_DataDisciplina DEFAULT(GETDATE()),
+	[Status] VARCHAR(7) NOT NULL CONSTRAINT DF_StatusDisciplina DEFAULT 'Aberta',
 	PlanoDeEnsino VARCHAR(200) NOT NULL,
 	CargaHoraria INT NOT NULL,
 	Competencias VARCHAR(200) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE Disciplina
 	IdCoordenador INT NOT NULL
 	CONSTRAINT PK_Disciplina PRIMARY KEY(ID),
 	CONSTRAINT UQ_NomeDisciplina UNIQUE(Nome),
-	CONSTRAINT CK_StatusDisciplina CHECK(Status IN('Aberta','Fechada')),
+	CONSTRAINT CK_StatusDisciplina CHECK([Status] IN('Aberta','Fechada')),
 	CONSTRAINT CK_PercentualPraticoDisciplina CHECK(PercentualPratico >= 0 AND PercentualPratico <= 100),
 	CONSTRAINT CK_PercentualTeoricoDisciplina CHECK(PercentualTeorico >= 0 AND PercentualTeorico <= 100)
 );
@@ -66,8 +66,11 @@ CREATE TABLE DisciplinaOfertada
 	CONSTRAINT PK_DisciplinaOfertada PRIMARY KEY (ID),
 	CONSTRAINT CK_AnoDisciplinaOfertada CHECK(Ano BETWEEN 1900 AND 2100),
 	CONSTRAINT CK_SemestreDisciplinaOfertada CHECK(Semestre BETWEEN 1 AND 2),
-	CONSTRAINT CK_TurmaDisciplinaOfertada CHECK(Turma LIKE '[A-Z]')
+	CONSTRAINT CK_TurmaDisciplinaOfertada CHECK(Turma LIKE '[A-Z]'),
+	CONSTRAINT UQ_ValidaOfertaDisciplinaOfertada UNIQUE(idDisciplina, idCurso, Ano, Semestre, Turma)
 );
 GO
+
+
 
 
