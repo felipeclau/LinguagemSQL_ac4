@@ -119,7 +119,7 @@ CREATE TABLE Curso
     ID INT NOT NULL IDENTITY(1,1),
     NomeCurso VARCHAR(30) NOT NULL,
     CONSTRAINT PK_IdCurso PRIMARY KEY (ID),
-    CONSTRAINT UQ_NomeCurso UNIQUE 9NomeCurso)
+    CONSTRAINT UQ_NomeCurso UNIQUE (NomeCurso)
  );
  GO
    
@@ -131,9 +131,9 @@ CREATE TABLE Curso
 *   IdDisciplinaOferdatada INT NOT NULL,
     DtSolicitacao DATE NOT NULL CONSTRAINT DF_DtSolicitacao DEFAULT (GETDATE()),
     <!--"IdCoordenador não é obrigatório de ser preenchido, porém, quando o coordenador aprová-la (ie: alterar o status da mesma), seu ID deve ser preenchido.-->
-*   IdCoordenador INT NUL,
+*   IdCoordenador INT NULL,
     Status VARCHAR(10) NOT NULL CONSTRAINT DF_Status DEFAULT ('Solicitada'),
-    CONSTRAINT CK_Status CHECK (Status IN ('Solicitada', 'Aprovada', 'Rejeitada', 'Cancelada')
+    CONSTRAINT CK_Status CHECK (Status IN ('Solicitada', 'Aprovada', 'Rejeitada', 'Cancelada'))
  );
  GO
  
@@ -143,7 +143,7 @@ CREATE TABLE Curso
     Titulo VARCHAR(50) NOT NULL,
     Descricao VARCHAR(3000) NOT NULL,
     Conteudo VARCHAR(3000) NOT NULL,
-    Tipo VARCHAR(14) NOT NULL CONSTRAINT CK_Tipo CHECK (Tipo IN ('Resposta Aberta','Teste'),
+    Tipo VARCHAR(14) NOT NULL CONSTRAINT CK_Tipo CHECK (Tipo IN ('Resposta Aberta','Teste')),
     Extras VARCHAR(30) NULL,
 *   IdProfessor INT NOT NULL
 );
