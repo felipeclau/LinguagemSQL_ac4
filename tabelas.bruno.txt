@@ -1,5 +1,3 @@
-Coloque seu CÓDIGO SQL abaixo:
-
 --Faculdade Impacta de Tecnologia
 --Projeto LMS (Learning Management System)
 --Curso: Banco de Dados
@@ -71,3 +69,5 @@ CREATE TABLE DisciplinaOfertada
 	CONSTRAINT CK_TurmaDisciplinaOfertada CHECK(Turma LIKE '[A-Z]')
 );
 GO
+
+
