@@ -1,5 +1,6 @@
 Coloque seu CÓDIGO SQL abaixo:
 
+=======
 --Faculdade Impacta de Tecnologia
 --Projeto LMS (Learning Management System)
 --Curso: Banco de Dados
@@ -69,5 +70,40 @@ CREATE TABLE DisciplinaOfertada
 	CONSTRAINT CK_AnoDisciplinaOfertada CHECK(Ano BETWEEN 1900 AND 2100),
 	CONSTRAINT CK_SemestreDisciplinaOfertada CHECK(Semestre BETWEEN 1 AND 2),
 	CONSTRAINT CK_TurmaDisciplinaOfertada CHECK(Turma LIKE '[A-Z]')
+);
+GO
+
+CREATE TABLE Curso
+(
+    ID INT NOT NULL IDENTITY(1,1),
+    NomeCurso VARCHAR(30) NOT NULL,
+    CONSTRAINT PK_IdCurso PRIMARY KEY (ID),
+    CONSTRAINT UQ_NomeCurso UNIQUE 9NomeCurso)
+ );
+ GO
+   
+ 
+ CREATE TABLE SolicitacaoMatricula
+ (
+    ID INT NOT NULL IDENTITY(1,1),
+*   IdAluno INT NOT NULL,
+*   IdDisciplinaOferdatada INT NOT NULL,
+    DtSolicitacao DATE NOT NULL CONSTRAINT DF_DtSolicitacao DEFAULT (GETDATE()),
+    <!--"IdCoordenador não é obrigatório de ser preenchido, porém, quando o coordenador aprová-la (ie: alterar o status da mesma), seu ID deve ser preenchido.-->
+*   IdCoordenador INT NUL,
+    Status VARCHAR(10) NOT NULL CONSTRAINT DF_Status DEFAULT ('Solicitada'),
+    CONSTRAINT CK_Status CHECK (Status IN ('Solicitada', 'Aprovada', 'Rejeitada', 'Cancelada')
+ );
+ GO
+ 
+ CREATE TABLE Atividade
+ (
+    ID INT NOT NULL IDENTITY(1,1),
+    Titulo VARCHAR(50) NOT NULL,
+    Descricao VARCHAR(3000) NOT NULL,
+    Conteudo VARCHAR(3000) NOT NULL,
+    Tipo VARCHAR(14) NOT NULL CONSTRAINT CK_Tipo CHECK (Tipo IN ('Resposta Aberta','Teste'),
+    Extras VARCHAR(30) NULL,
+*   IdProfessor INT NOT NULL
 );
 GO
