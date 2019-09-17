@@ -1,0 +1,37 @@
+CREATE TABLE Coordenador
+
+(
+	ID INT NOT NULL IDENTITY (1,1),
+	Nome VARCHAR (50) NOT NULL,
+	ID_Usuario INT NOT NULL,
+	Email VARCHAR (50) NOT NULL,
+	Celular TINYINT,
+	CONSTRAINT Pk_Coordenador PRIMARY KEY (ID),
+	CONSTRAINT UQ_EmailCoordenador UNIQUE(Email),
+	CONSTRAINT UQ_CelularCoordenador UNIQUE(Celular),
+	CONSTRAINT Ck_CelularCoordenador CHECK ( Celular LIKE '[0-9][0-9][0-9]) [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	CONSTRAINT fk_CoordenadorUsuario
+			FOREIGN KEY (ID_USUARIO)
+			REFERENCES Usuario (ID)
+);
+GO
+
+CREATE TABLE Aluno
+
+(
+	ID INT NOT NULL IDENTITY (1,1),
+	Nome VARCHAR (50) NOT NULL,
+	ID_Usuario INT NOT NULL,
+	Email VARCHAR (50) NOT NULL,
+	Celular TINYINT,
+	RA TINYINT NOT NULL,
+	Foto VARCHAR (50) NULL,
+	CONSTRAINT Pk_Aluno PRIMARY KEY (ID),
+	CONSTRAINT UQ_EmailAluno UNIQUE(Email),
+	CONSTRAINT UQ_CelularAluno UNIQUE(Celular),
+	CONSTRAINT Ck_CelularAluno CHECK ( Celular LIKE '[0-9][0-9][0-9]) [0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+	CONSTRAINT fk_AlunoUsuario
+			FOREIGN KEY (ID_USUARIO)
+			REFERENCES Usuario (ID)
+);
+GO
