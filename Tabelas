@@ -69,6 +69,9 @@ CREATE TABLE Professor
 	Celular TINYINT,
 	Apelido VARCHAR(50)
 	CONSTRAINT PK_Professor PRIMARY KEY (ID),
+	CONSTRAINT FK_IDId_usuarioProfessor
+	FOREIGN KEY (Id_usuario)
+	REFERENCES Usuario(ID),
 	CONSTRAINT UQ_EmailProfessor UNIQUE(Email),
 	CONSTRAINT UQ_CelularProfessor UNIQUE(Celular)
 );
@@ -92,6 +95,9 @@ CREATE TABLE Disciplina
 	PercentualTeorico TINYINT NOT NULL,
 	IdCoordenador INT NOT NULL
 	CONSTRAINT PK_Disciplina PRIMARY KEY(ID),
+	CONSTRAINT FK_IDCoordenadorDisciplina
+	FOREIGN KEY (IdCoordenador)
+	REFERENCES Coordenador(ID),
 	CONSTRAINT UQ_NomeDisciplina UNIQUE(Nome),
 	CONSTRAINT CK_StatusDisciplina CHECK([Status] IN('Aberta','Fechada')),
 	CONSTRAINT CK_PercentualPraticoDisciplina CHECK(PercentualPratico >= 0 AND PercentualPratico <= 100),
@@ -125,6 +131,18 @@ CREATE TABLE DisciplinaOfertada
 	CriterioAvaliacao VARCHAR(3000) NULL,
 	PlanoDeAulas VARCHAR(3000) NULL
 	CONSTRAINT PK_DisciplinaOfertada PRIMARY KEY (ID),
+	CONSTRAINT FK_IDCoordenadorDisciplinaOfertada
+	FOREIGN KEY (IdCoordenador)
+	REFERENCES Coordenador(ID),
+	CONSTRAINT FK_IDDisciplinaDisciplinaOfertada
+	FOREIGN KEY (IdDisciplina)
+	REFERENCES Disciplina(ID),
+	CONSTRAINT FK_IDCursoDisciplinaOfertada
+	FOREIGN KEY (IdCurso)
+	REFERENCES Curso(ID),
+	CONSTRAINT PK_IDProfessorDisciplinaOfertada
+	FOREIGN KEY (IdProfessor)
+	REFERENCES Professor(ID),
 	CONSTRAINT CK_AnoDisciplinaOfertada CHECK(Ano BETWEEN 1900 AND 2100),
 	CONSTRAINT CK_SemestreDisciplinaOfertada CHECK(Semestre BETWEEN 1 AND 2),
 	CONSTRAINT CK_TurmaDisciplinaOfertada CHECK(Turma LIKE '[A-Z]'),
