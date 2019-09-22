@@ -1,6 +1,4 @@
 /*
-Coloque seu CÓDIGO SQL abaixo:
-
 Faculdade Impacta de Tecnologia
 Projeto LMS (Learning Management System)
 Curso: Banco de Dados
@@ -20,8 +18,8 @@ CREATE TABLE Usuario(
 	[Login] VARCHAR (50) NOT NULL,
 	Senha VARCHAR (50) NOT NULL,
 	DtExpedição DATE NOT NULL CONSTRAINT DF_DataExpedição DEFAULT '01/01/1900',
-	CONSTRAINT Pk_Usuario PRIMARY KEY (ID),
-	CONSTRAINT UQ_LoginUsuario UNIQUE([Login]),
+		CONSTRAINT Pk_Usuario PRIMARY KEY (ID),
+		CONSTRAINT UQ_LoginUsuario UNIQUE([Login]),
 );
 GO
 
@@ -101,8 +99,8 @@ GO
 CREATE TABLE Curso(
    	ID INT NOT NULL IDENTITY(1,1),
    	NomeCurso VARCHAR(30) NOT NULL,
-    	CONSTRAINT PK_IdCurso PRIMARY KEY (ID),
-    	CONSTRAINT UQ_NomeCurso UNIQUE (NomeCurso)
+    		CONSTRAINT PK_IdCurso PRIMARY KEY (ID),
+    		CONSTRAINT UQ_NomeCurso UNIQUE (NomeCurso)
 );
 GO
 
